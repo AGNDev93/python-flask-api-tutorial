@@ -6,7 +6,7 @@ todos=[
     { "label": "My second task", "done": False }
     ] 
 # Estas dos líneas siempre deben estar al final de tu archivo app.py
-@app.route('/todos')
+@app.route('/todos', methods=["GET"])
 def hello_world():
     json_text=jsonify(todos)
     return json_text
@@ -15,7 +15,6 @@ def hello_world():
 def add_new_todo():
     request_body = request.get_json(force=True)
     todos.append(request_body)
-    print("Incoming request with the following body", request_body)
     return jsonify(todos)
 
 @app.route('/todos/<int:position>', methods=['DELETE'])
